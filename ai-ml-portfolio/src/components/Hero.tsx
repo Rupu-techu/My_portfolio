@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { personal, heroStats } from "@/lib/data";
 import { FiDownload, FiArrowRight } from "react-icons/fi";
 
@@ -52,7 +53,16 @@ export default function Hero() {
             <div className="relative">
               <div className="absolute inset-[-10px] rounded-[28px] border border-border/60" />
               <div className="relative w-[260px] md:w-[300px] h-[320px] md:h-[370px] rounded-[22px] flex items-center justify-center overflow-hidden shadow-card-hover" style={{ background: "linear-gradient(145deg,#EAE0D8 0%,#D4C2B0 100%)" }}>
-                <span className="font-serif text-[6rem] text-primary/25 select-none">AI</span>
+                <div className="relative w-[200px] h-[200px] md:w-[240px] md:h-[240px] rounded-full overflow-hidden border border-border/70 shadow-card-md bg-surface">
+                  <Image
+                    src="/profile.jpg"
+                    alt="Rupsha Debnath"
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 200px, 240px"
+                    className="object-cover object-center"
+                  />
+                </div>
                 <div className="absolute top-4 right-4 grid grid-cols-3 gap-1.5">
                   {Array.from({ length: 9 }).map((_, i) => <span key={i} className="w-[4px] h-[4px] rounded-full bg-primary/20" />)}
                 </div>

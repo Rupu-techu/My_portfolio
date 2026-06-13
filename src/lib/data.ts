@@ -233,7 +233,7 @@ export const featuredProjects: Project[] = [
       "Live demo available for review and presentation",
     ],
     github: "https://github.com/Rupu-techu/Aegisnexus-AI",
-    demo: "https://lnkd.in/gyb92JGb",
+    demo: "https://aegisnexus-ai-foqkxqvlxjh4isaxvi4msj.streamlit.app/",
     video: "https://youtu.be/crBn1nEVuu4",
   },
   {
@@ -245,10 +245,13 @@ export const featuredProjects: Project[] = [
     title: "Environmental AI Healthcare System using CNN and RAG",
     subtitle: "AI for Healthcare",
     description:
-      "Environmental AI healthcare system using CNN and RAG.",
+      "Developed an AI-based environmental health monitoring system that classifies environmental conditions including air pollution, garbage accumulation, stagnant water, and clean environments.",
     technologies: ["CNN", "RAG"],
     achievements: [
-      "Combines CNN and RAG for healthcare-oriented AI workflows",
+      "Classifies environmental risks using EfficientNetB0 transfer learning.",
+      "Integrates RAG with Ollama and LLaMA models.",
+      "Generates AI-powered health recommendations.",
+      "Creates automated environmental assessment reports in PDF format.",
     ],
     github:
       "https://github.com/logitechsoumili/Environmental_AI_Healthcare_System",

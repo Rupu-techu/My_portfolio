@@ -233,7 +233,7 @@ export const featuredProjects: Project[] = [
       "Live demo available for review and presentation",
     ],
     github: "https://github.com/Rupu-techu/Aegisnexus-AI",
-    demo: "https://lnkd.in/gyb92JGb",
+    demo: "https://aegisnexus-ai-foqkxqvlxjh4isaxvi4msj.streamlit.app/",
     video: "https://youtu.be/crBn1nEVuu4",
   },
   {

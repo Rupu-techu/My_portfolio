@@ -52,21 +52,21 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-ink mb-1.5">Name</label>
-                <input type="text" required placeholder="Enter your name" className="w-full bg-surface border-[1.5px] border-border rounded-lg px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-primary transition-colors" />
+                <input suppressHydrationWarning type="text" required placeholder="Enter your name" className="w-full bg-surface border-[1.5px] border-border rounded-lg px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-primary transition-colors" />
               </div>
               <div>
                 <label className="block text-xs font-semibold text-ink mb-1.5">Email</label>
-                <input type="email" required placeholder="Enter your email" className="w-full bg-surface border-[1.5px] border-border rounded-lg px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-primary transition-colors" />
+                <input suppressHydrationWarning type="email" required placeholder="Enter your email" className="w-full bg-surface border-[1.5px] border-border rounded-lg px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-primary transition-colors" />
               </div>
               <div>
                 <label className="block text-xs font-semibold text-ink mb-1.5">Subject</label>
-                <input type="text" required placeholder="Enter a subject" className="w-full bg-surface border-[1.5px] border-border rounded-lg px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-primary transition-colors" />
+                <input suppressHydrationWarning type="text" required placeholder="Enter a subject" className="w-full bg-surface border-[1.5px] border-border rounded-lg px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-primary transition-colors" />
               </div>
               <div>
                 <label className="block text-xs font-semibold text-ink mb-1.5">Message</label>
-                <textarea required rows={4} placeholder="Enter your message" className="w-full bg-surface border-[1.5px] border-border rounded-lg px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-primary transition-colors resize-y" />
+                <textarea suppressHydrationWarning required rows={4} placeholder="Enter your message" className="w-full bg-surface border-[1.5px] border-border rounded-lg px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-primary transition-colors resize-y" />
               </div>
-              <button type="submit" className={`w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-pill text-sm font-semibold transition-all duration-300 ${sent ? "bg-[#4a7c59] text-white" : "btn-primary"}`}>
+              <button suppressHydrationWarning type="submit" className={`w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-pill text-sm font-semibold transition-all duration-300 ${sent ? "bg-[#4a7c59] text-white" : "btn-primary"}`}>
                 <FiSend size={14} />{sent ? "Message Sent" : "Send Message"}
               </button>
             </form>
