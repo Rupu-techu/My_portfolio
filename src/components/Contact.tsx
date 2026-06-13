@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import { contactLinks } from "@/lib/data";
 import SectionHeader from "./SectionHeader";
 import { FiMail, FiLinkedin, FiGithub, FiMapPin, FiSend } from "react-icons/fi";
@@ -14,11 +15,34 @@ function getIcon(label: string) {
 }
 
 export default function Contact() {
+  const formRef = useRef<HTMLFormElement>(null);
   const [sent, setSent] = useState(false);
-  function handleSubmit(e: React.FormEvent) {
+  const [error, setError] = useState("");
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 3000);
+
+    // EmailJS values stay in NEXT_PUBLIC env vars so the client can read them
+    // without hardcoding credentials in the component source.
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey || !formRef.current) {
+      setError("Contact form is not configured yet. Please try again later.");
+      return;
+    }
+
+    try {
+      await emailjs.sendForm(serviceId, templateId, formRef.current, publicKey);
+      setSent(true);
+      setError("");
+      formRef.current.reset();
+      setTimeout(() => setSent(false), 3000);
+    } catch {
+      setSent(false);
+      setError("Sorry, your message could not be sent right now. Please email me directly at debi.rup@gmail.com.");
+    }
   }
 
   return (
@@ -49,26 +73,28 @@ export default function Contact() {
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0, transition: { duration: 0.5 } }} viewport={{ once: true }} className="bg-bg border border-border rounded-2xl p-7">
             <h3 className="font-serif text-xl text-ink mb-5">Send a message</h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+              <input type="hidden" name="to_email" value="debi.rup@gmail.com" />
               <div>
                 <label className="block text-xs font-semibold text-ink mb-1.5">Name</label>
-                <input suppressHydrationWarning type="text" required placeholder="Enter your name" className="w-full bg-surface border-[1.5px] border-border rounded-lg px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-primary transition-colors" />
+                <input suppressHydrationWarning type="text" name="from_name" required placeholder="Enter your name" className="w-full bg-surface border-[1.5px] border-border rounded-lg px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-primary transition-colors" />
               </div>
               <div>
                 <label className="block text-xs font-semibold text-ink mb-1.5">Email</label>
-                <input suppressHydrationWarning type="email" required placeholder="Enter your email" className="w-full bg-surface border-[1.5px] border-border rounded-lg px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-primary transition-colors" />
+                <input suppressHydrationWarning type="email" name="from_email" required placeholder="Enter your email" className="w-full bg-surface border-[1.5px] border-border rounded-lg px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-primary transition-colors" />
               </div>
               <div>
                 <label className="block text-xs font-semibold text-ink mb-1.5">Subject</label>
-                <input suppressHydrationWarning type="text" required placeholder="Enter a subject" className="w-full bg-surface border-[1.5px] border-border rounded-lg px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-primary transition-colors" />
+                <input suppressHydrationWarning type="text" name="subject" required placeholder="Enter a subject" className="w-full bg-surface border-[1.5px] border-border rounded-lg px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-primary transition-colors" />
               </div>
               <div>
                 <label className="block text-xs font-semibold text-ink mb-1.5">Message</label>
-                <textarea suppressHydrationWarning required rows={4} placeholder="Enter your message" className="w-full bg-surface border-[1.5px] border-border rounded-lg px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-primary transition-colors resize-y" />
+                <textarea suppressHydrationWarning name="message" required rows={4} placeholder="Enter your message" className="w-full bg-surface border-[1.5px] border-border rounded-lg px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-primary transition-colors resize-y" />
               </div>
               <button suppressHydrationWarning type="submit" className={`w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-pill text-sm font-semibold transition-all duration-300 ${sent ? "bg-[#4a7c59] text-white" : "btn-primary"}`}>
                 <FiSend size={14} />{sent ? "Message Sent" : "Send Message"}
               </button>
+              {error && <p className="text-xs text-red-600 leading-[1.5]">{error}</p>}
             </form>
           </motion.div>
         </div>
