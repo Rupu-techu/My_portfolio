@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: #F5F0EB;
+    color: #1E1A17;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  ::selection { background-color: #7C5C45; color: #fff; }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: #F5F0EB; }
+  ::-webkit-scrollbar-thumb { background: #C9A98A; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #7C5C45; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-pill text-sm font-semibold
+           hover:bg-[#6a4e3a] active:scale-[0.98] transition-all duration-200 shadow-sm hover:shadow-card-md;
+  }
+  .btn-outline {
+    @apply inline-flex items-center gap-2 border-[1.5px] border-primary text-primary px-6 py-3 rounded-pill text-sm font-semibold
+           hover:bg-primary hover:text-white active:scale-[0.98] transition-all duration-200;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 text-primary px-4 py-2 rounded-pill text-sm font-semibold hover:bg-accent transition-all duration-200;
+  }
+  .card { @apply bg-surface border border-border rounded-card shadow-card; }
+  .chip { @apply bg-accent border border-accent-border rounded-pill px-3.5 py-1 text-xs font-medium text-primary; }
+  .chip-muted { @apply bg-bg border border-border rounded-md px-2.5 py-1 text-xs font-medium text-muted; }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+}
