@@ -20,7 +20,7 @@ export default function GitHubSection() {
   return (
     <section id="github" className="py-24 bg-bg">
       <div className="max-w-5xl mx-auto px-6">
-        <SectionHeader label="Open Source" title="GitHub Activity" />
+        <SectionHeader label="Open Source" title="GitHub Profile Highlights" />
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5 } }} viewport={{ once: true }} className="bg-surface border border-border rounded-2xl p-7 flex flex-wrap gap-6 items-center mb-7 shadow-card">
           <div className="w-[72px] h-[72px] rounded-full bg-gradient-to-br from-[#e8ddd5] to-[#d4c4b5] border-2 border-border flex items-center justify-center text-3xl shrink-0">GH</div>
           <div className="flex-1 min-w-[200px]">
@@ -40,7 +40,7 @@ export default function GitHubSection() {
           </a>
         </motion.div>
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1, transition: { duration: 0.6 } }} viewport={{ once: true }}>
-          <p className="text-xs text-muted mb-3">Contribution activity</p>
+          <p className="text-xs text-muted mb-3">GitHub profile highlights</p>
           <div className="overflow-x-auto pb-2">
             <div className="flex gap-[3px]" style={{ minWidth: `${WEEKS * 13}px` }}>
               {Array.from({ length: WEEKS }).map((_, col) => (

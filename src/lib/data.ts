@@ -40,6 +40,15 @@ export type AchievementItem = {
   meta: string;
 };
 
+export type FeaturedAchievement = {
+  icon: string;
+  title: string;
+  role: string;
+  description: string;
+  profileUrl: string;
+  buttonText: string;
+};
+
 export type ContactLink = {
   icon: string;
   label: string;
@@ -70,7 +79,7 @@ export const personal = {
   githubUsername: "@Rupu-techu",
   location: "Kolkata, West Bengal, India",
   resumeUrl: "https://drive.google.com/file/d/12WSq0R_MelAff6iGbC6qoTtLzY6jGYgf/view?usp=sharing",
-  githubSubtitle: "AI/ML Student | Hackathon Participant | GSSoC 2026 Contributor",
+  githubSubtitle: "GitHub Profile Highlights",
 };
 
 export const heroStats: StatItem[] = [
@@ -421,12 +430,6 @@ export const experiences: ExperienceItem[] = [
 
 export const achievements: AchievementItem[] = [
   {
-    icon: "GC",
-    title: "Contributor, GirlScript Summer of Code (GSSoC) 2026",
-    description: "AI / Agents Track contributor.",
-    meta: "Open Source",
-  },
-  {
     icon: "DSA",
     title: "150+ DSA Problems Solved",
     description: "Solved across LeetCode, HackerRank, and GeeksforGeeks.",
@@ -487,6 +490,16 @@ export const achievements: AchievementItem[] = [
     meta: "Coursera",
   },
 ];
+
+export const featuredAchievement: FeaturedAchievement = {
+  icon: "GC",
+  title: "GirlScript Summer of Code (GSSoC) 2026",
+  role: "Contributor - AI / Agents Track",
+  description:
+    "Selected as a contributor for GirlScript Summer of Code 2026, contributing to open-source AI and intelligent systems projects while collaborating with the broader developer community.",
+  profileUrl: "https://gssoc.girlscript.org/profile/d66db5bc-527d-4a05-a787-f7a352ae7033",
+  buttonText: "View GSSoC Profile",
+};
 
 export const githubStats: StatItem[] = [
   { value: "316", label: "Contributions in 2026" },
