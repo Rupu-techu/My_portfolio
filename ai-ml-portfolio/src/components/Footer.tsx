@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="bg-ink text-white py-8">
       <div className="max-w-5xl mx-auto px-6 flex flex-wrap items-center justify-between gap-4">
         <p className="font-serif text-[1.1rem] opacity-90">{personal.name}</p>
-        <p className="text-xs opacity-50">Copyright {new Date().getFullYear()} - Designed with care</p>
+        <p className="text-xs opacity-50">Designed with care</p>
         <div className="flex gap-3">
           {[
             { href: personal.github, label: "GitHub", Icon: FiGithub },
