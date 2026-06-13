@@ -22,6 +22,7 @@ export type Project = {
   achievements: string[];
   github: string;
   demo?: string | null;
+  video?: string | null;
 };
 
 export type ExperienceItem = {
@@ -168,7 +169,7 @@ export const skillGroups: SkillGroup[] = [
   },
 ];
 
-export const projects: Project[] = [
+export const featuredProjects: Project[] = [
   {
     id: "oncoai",
     featured: true,
@@ -186,6 +187,7 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/Rupu-techu/OncoAI-Early-stage-Cancer-Detector",
     demo: null,
+    video: null,
   },
   {
     id: "cloud-anomaly",
@@ -204,6 +206,7 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/soumi-saha12/cloud_anomaly_detection_system",
     demo: null,
+    video: null,
   },
   {
     id: "aegisnexus",
@@ -222,6 +225,7 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/Rupu-techu/Aegisnexus-AI",
     demo: "https://lnkd.in/gyb92JGb",
+    video: "https://youtu.be/crBn1nEVuu4",
   },
   {
     id: "environmental-ai-healthcare",
@@ -240,7 +244,11 @@ export const projects: Project[] = [
     github:
       "https://github.com/logitechsoumili/Environmental_AI_Healthcare_System",
     demo: null,
+    video: null,
   },
+];
+
+export const additionalProjects: Project[] = [
   {
     id: "aidflow",
     featured: false,
@@ -258,6 +266,7 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/Rupu-techu/AidFLow",
     demo: "https://aidflow-ai.vercel.app/",
+    video: null,
   },
   {
     id: "electo",
@@ -269,13 +278,14 @@ export const projects: Project[] = [
     subtitle: "AI Election Assistant",
     description:
       "AI-powered election assistant with cloud deployment and official resource integration.",
-    technologies: ["AI Assistant", "Cloud Deployment"],
+    technologies: ["AI Assistant", "Cloud Deployment", "Official Resources"],
     achievements: [
       "Built for Hack2Skill PromptWars",
       "Integrates official resource access for election assistance",
     ],
     github: "https://github.com/Rupu-techu/ELECTO_interactive-election-assistant",
     demo: "https://electo-interactive-election-assista.vercel.app/",
+    video: null,
   },
   {
     id: "devsprint-ai",
@@ -287,13 +297,14 @@ export const projects: Project[] = [
     subtitle: "Project Generator",
     description:
       "AI-powered project generator for automated planning and starter code generation.",
-    technologies: ["AI Project Generation"],
+    technologies: ["AI Project Generation", "Planning Automation"],
     achievements: [
       "Automates project planning and starter code generation",
       "Developed for the IBM Bob Dev Day Hackathon",
     ],
     github: "https://github.com/Rupu-techu/Devsprint-AI_powered-project-generator",
     demo: null,
+    video: null,
   },
   {
     id: "ai-race-engineer-copilot",
@@ -305,13 +316,14 @@ export const projects: Project[] = [
     subtitle: "SkillsBuild Project",
     description:
       "AI Race Engineer Copilot developed for IBM SkillsBuild.",
-    technologies: ["AI Copilot"],
+    technologies: ["AI Copilot", "IBM SkillsBuild"],
     achievements: [
       "Built for IBM SkillsBuild",
       "Demo video available for presentation",
     ],
     github: "https://github.com/Rupu-techu/IBM_SkillsBuild_AI-Race-Engineer-Copilot",
     demo: null,
+    video: "https://www.youtube.com/watch?v=GrsRiPt-kiA",
   },
   {
     id: "buildx-payment-gateway",
@@ -322,12 +334,15 @@ export const projects: Project[] = [
     title: "BuildX Payment Gateway",
     subtitle: "Payment Gateway",
     description: "Payment gateway project.",
-    technologies: [],
+    technologies: ["Payment Gateway"],
     achievements: [],
     github: "https://github.com/Rupu-techu/buildx-payment-gateway",
     demo: null,
+    video: null,
   },
 ];
+
+export const projects: Project[] = [...featuredProjects, ...additionalProjects];
 
 export const experiences: ExperienceItem[] = [
   {
