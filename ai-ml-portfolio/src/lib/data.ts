@@ -501,6 +501,16 @@ export const featuredAchievement: FeaturedAchievement = {
   buttonText: "View GSSoC Profile",
 };
 
+export const codingAchievement: FeaturedAchievement = {
+  icon: "LC",
+  title: "Data Structures & Algorithms",
+  role: "LeetCode",
+  description:
+    "Solved 150+ problems across LeetCode, HackerRank, and GeeksforGeeks while strengthening problem-solving, algorithmic thinking, and coding skills.",
+  profileUrl: "https://leetcode.com/u/rupu-techu/",
+  buttonText: "View LeetCode Profile",
+};
+
 export const githubStats: StatItem[] = [
   { value: "316", label: "Contributions in 2026" },
   { value: "18", label: "Public Repositories" },
