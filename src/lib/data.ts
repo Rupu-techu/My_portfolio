@@ -489,10 +489,11 @@ export const achievements: AchievementItem[] = [
 ];
 
 export const githubStats: StatItem[] = [
-  { value: "10+", label: "Hackathons Participated" },
-  { value: "150+", label: "DSA Problems Solved" },
-  { value: "GSSoC 2026", label: "Contributor" },
-  { value: "Multiple", label: "AI/ML Projects Built" },
+  { value: "316", label: "Contributions in 2026" },
+  { value: "18", label: "Public Repositories" },
+  { value: "276+", label: "Commits in 2026" },
+  { value: "24", label: "Pull Requests" },
+  { value: "22", label: "Repositories Contributed To" },
 ];
 
 export const contactLinks: ContactLink[] = [
