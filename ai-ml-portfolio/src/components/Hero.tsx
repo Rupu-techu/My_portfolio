@@ -1,15 +1,16 @@
 "use client";
 import { motion } from "framer-motion";
-import { personal } from "@/lib/data";
+import { personal, heroStats } from "@/lib/data";
 import { FiDownload, FiArrowRight } from "react-icons/fi";
 
 const container = {
   hidden: {},
   show: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
 };
+
 const item = {
   hidden: { opacity: 0, y: 28 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] } },
 };
 
 export default function Hero() {
@@ -27,7 +28,7 @@ export default function Hero() {
             </motion.h1>
             <motion.p variants={item} className="text-lg text-secondary font-medium mb-1">{personal.title}</motion.p>
             <motion.p variants={item} className="text-sm text-muted mb-6">
-              {personal.degree}&nbsp;·&nbsp;GPA {personal.gpa}&nbsp;·&nbsp;{personal.gradYear}
+              {personal.degree} | GPA {personal.gpa} | {personal.gradYear}
             </motion.p>
             <motion.p variants={item} className="text-base text-muted leading-[1.8] max-w-[500px] mb-9">{personal.bio}</motion.p>
             <motion.div variants={item} className="flex flex-wrap gap-3">
@@ -39,10 +40,10 @@ export default function Hero() {
               </a>
             </motion.div>
             <motion.div variants={item} className="flex flex-wrap gap-5 mt-9 pt-7 border-t border-border">
-              {[{ n: "3+", l: "AI Projects" },{ n: "5+", l: "Certifications" },{ n: "1st", l: "Hackathon Winner" }].map(s => (
-                <div key={s.l}>
-                  <span className="font-serif text-2xl text-primary">{s.n}</span>
-                  <span className="block text-xs text-muted mt-0.5">{s.l}</span>
+              {heroStats.map(s => (
+                <div key={s.label}>
+                  <span className="font-serif text-2xl text-primary">{s.value}</span>
+                  <span className="block text-xs text-muted mt-0.5">{s.label}</span>
                 </div>
               ))}
             </motion.div>
@@ -51,13 +52,13 @@ export default function Hero() {
             <div className="relative">
               <div className="absolute inset-[-10px] rounded-[28px] border border-border/60" />
               <div className="relative w-[260px] md:w-[300px] h-[320px] md:h-[370px] rounded-[22px] flex items-center justify-center overflow-hidden shadow-card-hover" style={{ background: "linear-gradient(145deg,#EAE0D8 0%,#D4C2B0 100%)" }}>
-                <span className="font-serif text-[6rem] text-primary/25 select-none">◈</span>
+                <span className="font-serif text-[6rem] text-primary/25 select-none">AI</span>
                 <div className="absolute top-4 right-4 grid grid-cols-3 gap-1.5">
-                  {Array.from({ length: 9 }).map((_,i) => <span key={i} className="w-[4px] h-[4px] rounded-full bg-primary/20" />)}
+                  {Array.from({ length: 9 }).map((_, i) => <span key={i} className="w-[4px] h-[4px] rounded-full bg-primary/20" />)}
                 </div>
               </div>
               <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0, transition: { delay: 0.75 } }} className="absolute -bottom-5 left-1/2 -translate-x-1/2 bg-surface border border-border rounded-pill px-5 py-2 text-xs font-semibold text-primary whitespace-nowrap shadow-card-md">
-                📍 {personal.location}
+                LOC {personal.location}
               </motion.div>
             </div>
           </motion.div>

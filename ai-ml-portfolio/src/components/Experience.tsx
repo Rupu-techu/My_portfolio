@@ -5,9 +5,10 @@ import SectionHeader from "./SectionHeader";
 
 const typeColors: Record<string, string> = {
   Internship: "bg-[#fdf0e8] text-[#a05c2a] border-[#f0d0b4]",
-  Research:   "bg-[#e8f0f8] text-[#2a5ca0] border-[#b4cff0]",
-  Training:   "bg-[#e8f8ee] text-[#2a8055] border-[#b4f0cc]",
+  Research: "bg-[#e8f0f8] text-[#2a5ca0] border-[#b4cff0]",
+  Training: "bg-[#e8f8ee] text-[#2a8055] border-[#b4f0cc]",
   Leadership: "bg-[#f0e8f8] text-[#6a2aa0] border-[#d4b4f0]",
+  Competition: "bg-[#f8f2e6] text-[#8a5a1a] border-[#e6cfaa]",
 };
 
 export default function Experience() {
