@@ -246,28 +246,28 @@ export const featuredProjects: Project[] = [
     demo: null,
     video: null,
   },
-];
-
-export const additionalProjects: Project[] = [
   {
     id: "aidflow",
-    featured: false,
+    featured: true,
     emoji: "AF",
     gradientFrom: "#e8ddd5",
     gradientTo: "#d8c0ac",
-    title: "AidFlow",
+    title: "AidFlow - AI-Driven Crisis Intelligence System",
     subtitle: "Crisis Intelligence",
     description:
-      "AI-driven crisis intelligence system developed for GDG India Solution Challenge 2026.",
+      "AI-powered crisis intelligence platform developed for GDG India Solution Challenge 2026. Built using FastAPI, Google Gemini API, and cloud deployment technologies to support intelligent crisis monitoring and decision support.",
     technologies: ["FastAPI", "Gemini API", "Google Cloud Run"],
     achievements: [
       "Co-developed for GDG India Solution Challenge 2026",
-      "AI-driven crisis intelligence system",
+      "Supports intelligent crisis monitoring and decision support",
     ],
     github: "https://github.com/Rupu-techu/AidFLow",
     demo: "https://aidflow-ai.vercel.app/",
     video: null,
   },
+];
+
+export const additionalProjects: Project[] = [
   {
     id: "electo",
     featured: false,
