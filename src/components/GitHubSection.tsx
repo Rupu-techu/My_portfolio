@@ -62,7 +62,7 @@ export default function GitHubSection() {
   }, []);
 
   return (
-    <section id="github" className="pt-8 pb-24 bg-bg">
+    <section id="github" className="py-24 bg-bg">
       <div className="max-w-5xl mx-auto px-6">
         <SectionHeader label="Open Source" title="GitHub Profile Highlights" />
 
@@ -70,24 +70,25 @@ export default function GitHubSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
           viewport={{ once: true }}
-          className="bg-surface border border-border rounded-2xl p-7 flex flex-wrap lg:flex-nowrap gap-6 items-start shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-card-md"
+          whileHover={{ y: -6, scale: 1.01 }}
+          className="bg-surface border border-border rounded-[20px] p-7 flex flex-wrap lg:flex-nowrap gap-6 items-start shadow-[0_12px_35px_rgba(0,0,0,0.08)] transition-all duration-200 hover:shadow-[0_16px_42px_rgba(0,0,0,0.11)]"
         >
-          <div className="relative w-[88px] h-[88px] rounded-full overflow-hidden bg-gradient-to-br from-[#e8ddd5] to-[#d4c4b5] border-2 border-border flex items-center justify-center shrink-0">
+          <div className="relative w-[104px] h-[104px] rounded-full overflow-hidden bg-gradient-to-br from-[#e8ddd5] to-[#d4c4b5] border-2 border-border flex items-center justify-center shrink-0">
             {loading ? (
-              <span className="text-xl font-semibold text-primary">GH</span>
+              <span className="text-2xl font-semibold text-primary">GH</span>
             ) : data?.avatarUrl ? (
-              <Image src={data.avatarUrl} alt={data.name ?? personal.githubUsername} fill sizes="88px" className="object-cover" />
+              <Image src={data.avatarUrl} alt={data.name ?? personal.githubUsername} fill sizes="104px" className="object-cover" />
             ) : (
-              <span className="text-xl font-semibold text-primary">GH</span>
+              <span className="text-2xl font-semibold text-primary">GH</span>
             )}
           </div>
 
           <div className="flex-1 min-w-[200px]">
-            <h3 className="font-serif text-xl text-ink mb-1">{data?.username ?? personal.githubUsername}</h3>
+            <h3 className="font-serif text-2xl text-ink mb-1">{data?.username ?? personal.githubUsername}</h3>
             {data?.name && <p className="text-sm text-secondary mb-1">{data.name}</p>}
             {data?.bio && (
               <p
-                className="text-sm text-muted mb-3 leading-[1.6]"
+                className="text-sm text-muted mb-3 leading-[1.7] max-w-2xl"
                 style={{
                   display: "-webkit-box",
                   WebkitBoxOrient: "vertical",
@@ -110,7 +111,7 @@ export default function GitHubSection() {
                       index !== statItems.length - 1 ? "lg:border-r lg:border-border" : ""
                     } ${index !== statItems.length - 1 ? "border-b border-border md:border-b-0" : ""}`}
                   >
-                    <strong className="block font-serif text-xl text-primary">{valueOrDash(data?.[stat.key])}</strong>
+                    <strong className="block font-serif text-[2rem] text-primary leading-none">{valueOrDash(data?.[stat.key])}</strong>
                     <span className="block text-[0.65rem] uppercase tracking-[0.14em] text-muted mt-1 leading-[1.35]">
                       {stat.label}
                     </span>

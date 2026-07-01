@@ -5,38 +5,47 @@
 :root {
   --font-inter: system-ui, sans-serif;
   --font-dm-serif: Georgia, serif;
+  --color-bg: 248 246 242;
+  --color-surface: 255 255 255;
+  --color-primary: 139 94 60;
+  --color-secondary: 200 155 109;
+  --color-ink: 26 26 26;
+  --color-muted: 85 85 85;
+  --color-border: 230 222 213;
+  --color-accent: 245 238 230;
+  --color-accent-border: 224 201 179;
 }
 
 @layer base {
   html { scroll-behavior: smooth; }
   body {
-    background-color: #F5F0EB;
-    color: #1E1A17;
+    background-color: rgb(var(--color-bg));
+    color: rgb(var(--color-ink));
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  ::selection { background-color: #7C5C45; color: #fff; }
+  ::selection { background-color: rgb(var(--color-primary)); color: #fff; }
   ::-webkit-scrollbar { width: 5px; }
-  ::-webkit-scrollbar-track { background: #F5F0EB; }
-  ::-webkit-scrollbar-thumb { background: #C9A98A; border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: #7C5C45; }
+  ::-webkit-scrollbar-track { background: rgb(var(--color-bg)); }
+  ::-webkit-scrollbar-thumb { background: rgb(var(--color-secondary)); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgb(var(--color-primary)); }
 }
 
 @layer components {
   .btn-primary {
     @apply inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-pill text-sm font-semibold
-           hover:bg-[#6a4e3a] active:scale-[0.98] transition-all duration-200 shadow-sm hover:shadow-card-md;
+           transition-all duration-200 shadow-sm hover:shadow-card-md hover:-translate-y-0.5 hover:bg-[#714b2f] active:translate-y-0 active:scale-[0.99];
   }
   .btn-outline {
-    @apply inline-flex items-center gap-2 border-[1.5px] border-primary text-primary px-6 py-3 rounded-pill text-sm font-semibold
-           hover:bg-primary hover:text-white active:scale-[0.98] transition-all duration-200;
+    @apply inline-flex items-center gap-2 border border-primary text-primary px-6 py-3 rounded-pill text-sm font-semibold
+           transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary hover:text-white hover:shadow-card-md active:translate-y-0 active:scale-[0.99];
   }
   .btn-ghost {
-    @apply inline-flex items-center gap-2 text-primary px-4 py-2 rounded-pill text-sm font-semibold hover:bg-accent transition-all duration-200;
+    @apply inline-flex items-center gap-2 text-primary px-4 py-2 rounded-pill text-sm font-semibold transition-all duration-200 hover:bg-accent hover:-translate-y-0.5;
   }
-  .card { @apply bg-surface border border-border rounded-card shadow-card; }
-  .chip { @apply bg-accent border border-accent-border rounded-pill px-3.5 py-1 text-xs font-medium text-primary; }
-  .chip-muted { @apply bg-bg border border-border rounded-md px-2.5 py-1 text-xs font-medium text-muted; }
+  .card { @apply bg-surface border border-border rounded-[20px] shadow-[0_12px_35px_rgba(0,0,0,0.08)] transition-all duration-200 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-[0_16px_42px_rgba(0,0,0,0.11)]; }
+  .chip { @apply inline-flex items-center bg-accent border border-accent-border rounded-pill px-3.5 py-1 text-xs font-medium text-primary transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#efe2d3] hover:border-[#cda476]; }
+  .chip-muted { @apply inline-flex items-center bg-surface border border-border rounded-md px-2.5 py-1 text-xs font-medium text-muted transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#faf7f3] hover:border-accent-border hover:text-ink; }
 }
 
 @layer utilities {

@@ -9,15 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg:              "#F5F0EB",
-        surface:         "#FFFFFF",
-        primary:         "#7C5C45",
-        secondary:       "#A67C52",
-        ink:             "#1E1A17",
-        muted:           "#7A6B5D",
-        border:          "#E2D6CC",
-        accent:          "#F0E6DC",
-        "accent-border": "#D4B8A5",
+        bg:              "rgb(var(--color-bg) / <alpha-value>)",
+        surface:         "rgb(var(--color-surface) / <alpha-value>)",
+        primary:         "rgb(var(--color-primary) / <alpha-value>)",
+        secondary:       "rgb(var(--color-secondary) / <alpha-value>)",
+        ink:             "rgb(var(--color-ink) / <alpha-value>)",
+        muted:           "rgb(var(--color-muted) / <alpha-value>)",
+        border:          "rgb(var(--color-border) / <alpha-value>)",
+        accent:          "rgb(var(--color-accent) / <alpha-value>)",
+        "accent-border": "rgb(var(--color-accent-border) / <alpha-value>)",
       },
       fontFamily: {
         serif: ["var(--font-dm-serif)", "Georgia", "serif"],

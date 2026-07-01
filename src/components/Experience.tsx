@@ -15,7 +15,7 @@ export default function Experience() {
         <div className="relative pl-8">
           <div className="absolute left-[6px] top-2 bottom-2 w-px bg-border" />
           {experiences.map((exp, i) => (
-            <motion.div key={i} initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0, transition: { delay: i * 0.1, duration: 0.5 } }} viewport={{ once: true }} className="relative mb-10 last:mb-0">
+            <motion.div key={i} initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0, transition: { delay: i * 0.1, duration: 0.5 } }} viewport={{ once: true }} whileHover={{ x: 2, y: -6, scale: 1.01 }} className="relative mb-10 last:mb-0 bg-surface border border-border rounded-[20px] p-6 shadow-[0_12px_35px_rgba(0,0,0,0.08)] transition-all duration-200 hover:shadow-[0_16px_42px_rgba(0,0,0,0.11)]">
               <div className="absolute -left-8 top-1.5 w-3.5 h-3.5 rounded-full bg-surface border-2 border-primary shadow-sm" />
               <div className="flex flex-wrap items-center gap-2 mb-1.5">
                 <span className={`text-[0.68rem] font-semibold tracking-wide uppercase rounded-full px-2.5 py-0.5 border ${typeColors[exp.type] ?? "bg-bg text-muted border-border"}`}>{exp.type}</span>

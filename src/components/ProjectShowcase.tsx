@@ -47,10 +47,10 @@ function ProjectCard({ project }: { project: Project }) {
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
       viewport={{ once: true }}
-      whileHover={{ y: -4 }}
-      className="group bg-bg border border-border rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 flex h-full flex-col"
+      whileHover={{ y: -6, scale: 1.01 }}
+      className="group bg-surface border border-border rounded-[20px] overflow-hidden shadow-[0_12px_35px_rgba(0,0,0,0.08)] transition-all duration-200 flex h-full flex-col hover:shadow-[0_16px_42px_rgba(0,0,0,0.11)]"
     >
-      <div className="relative aspect-[16/9] overflow-hidden bg-[#efe4db] border-b border-border">
+      <div className="relative aspect-[16/9] overflow-hidden bg-[#f6f2ed] border-b border-border">
         {project.image ? (
           <>
             <Image
@@ -87,7 +87,7 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
         <p className="text-[0.68rem] font-semibold uppercase tracking-widest text-secondary mb-1">{project.subtitle}</p>
         <h3 className="font-serif text-xl text-ink mb-2">{project.title}</h3>
-        <p className="text-sm text-muted leading-[1.65] mb-4 flex-1">{project.description}</p>
+        <p className="text-sm text-muted leading-[1.7] mb-4 flex-1 max-w-[38rem]">{project.description}</p>
         <ul className="space-y-1.5 mb-5">
           {project.achievements.map((a, ai) => (
             <li key={ai} className="flex gap-2 text-xs text-muted">

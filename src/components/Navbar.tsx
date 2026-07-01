@@ -37,10 +37,10 @@ export default function Navbar() {
           {navLinks.map(l => {
             const active = activeHash === l.href;
             return (
-              <a key={l.href} href={l.href} className={`relative px-3 py-1.5 text-sm font-medium rounded-md transition-colors duration-200 ${active ? "text-primary" : "text-muted hover:text-ink"}`}>
+              <a key={l.href} href={l.href} className={`relative px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200 ${active ? "text-white shadow-sm" : "text-muted hover:text-primary"}`}>
                 {l.label}
                 {active && (
-                  <motion.span layoutId="nav-pill" className="absolute inset-0 bg-accent rounded-md -z-10" transition={{ type: "spring", stiffness: 380, damping: 32 }} />
+                  <motion.span layoutId="nav-pill" className="absolute inset-0 rounded-md -z-10 bg-primary" transition={{ type: "spring", stiffness: 380, damping: 32 }} />
                 )}
               </a>
             );
@@ -55,9 +55,12 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.nav initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.22 }} className="md:hidden overflow-hidden bg-surface border-b border-border">
-            {navLinks.map(l => (
-              <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="flex items-center px-6 py-3.5 text-sm text-muted border-b border-border last:border-0 hover:text-primary hover:bg-accent/40 transition-colors">{l.label}</a>
-            ))}
+            {navLinks.map(l => {
+              const active = activeHash === l.href;
+              return (
+                <a key={l.href} href={l.href} onClick={() => setOpen(false)} className={`flex items-center px-6 py-3.5 text-sm border-b border-border last:border-0 transition-colors ${active ? "bg-accent/60 text-primary font-semibold" : "text-muted hover:text-primary hover:bg-accent/40"}`}>{l.label}</a>
+              );
+            })}
           </motion.nav>
         )}
       </AnimatePresence>

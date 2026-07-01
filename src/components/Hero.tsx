@@ -51,6 +51,7 @@ export default function Hero() {
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.93 }} animate={{ opacity: 1, scale: 1, transition: { delay: 0.2, duration: 0.65 } }} className="flex justify-center md:justify-end order-first md:order-last">
             <div className="relative">
+              <div className="absolute inset-[-28px] rounded-full bg-[radial-gradient(circle_at_center,rgba(200,155,109,0.18)_0%,rgba(248,246,242,0)_70%)] blur-2xl" />
               <div className="absolute inset-[-10px] rounded-[28px] border border-border/60" />
               <div className="relative w-[260px] md:w-[300px] h-[320px] md:h-[370px] rounded-[22px] flex items-center justify-center overflow-hidden shadow-card-hover" style={{ background: "linear-gradient(145deg,#EAE0D8 0%,#D4C2B0 100%)" }}>
                 <div className="relative w-[200px] h-[200px] md:w-[240px] md:h-[240px] rounded-full overflow-hidden border border-border/70 shadow-card-md bg-surface">

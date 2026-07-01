@@ -21,17 +21,17 @@ export default function About() {
             </motion.div>
           </div>
           <motion.div initial="hidden" whileInView="show" variants={stagger} viewport={{ once: true }} className="space-y-4 lg:pt-[4.5rem]">
-            <motion.div variants={fadeUp} className="bg-bg border border-border rounded-card p-6">
+            <motion.div variants={fadeUp} whileHover={{ y: -6, scale: 1.01 }} className="bg-surface border border-border rounded-[20px] p-6 shadow-[0_12px_35px_rgba(0,0,0,0.08)] transition-all duration-200 hover:shadow-[0_16px_42px_rgba(0,0,0,0.11)]">
               <h4 className="font-serif text-lg text-ink mb-2.5">🎯 Career Aspirations</h4>
               <p className="text-sm text-muted leading-[1.75]">{about.career}</p>
             </motion.div>
-            <motion.div variants={fadeUp} className="bg-bg border border-border rounded-card p-6">
+            <motion.div variants={fadeUp} whileHover={{ y: -6, scale: 1.01 }} className="bg-surface border border-border rounded-[20px] p-6 shadow-[0_12px_35px_rgba(0,0,0,0.08)] transition-all duration-200 hover:shadow-[0_16px_42px_rgba(0,0,0,0.11)]">
               <h4 className="font-serif text-lg text-ink mb-2.5">🎓 Academic Focus</h4>
               <p className="text-sm text-muted leading-[1.75]">{about.academic}</p>
             </motion.div>
             <motion.div variants={fadeUp} className="grid grid-cols-2 gap-3">
               {about.stats.map(s => (
-                <div key={s.label} className="bg-surface border border-border rounded-[12px] p-5 text-center shadow-card">
+                <div key={s.label} className="bg-surface border border-border rounded-[18px] p-5 text-center shadow-[0_12px_35px_rgba(0,0,0,0.08)] transition-all duration-200 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-[0_16px_42px_rgba(0,0,0,0.11)]">
                   <p className="font-serif text-[2rem] leading-none text-primary">{s.value}</p>
                   <p className="text-xs text-muted mt-2 font-medium">{s.label}</p>
                 </div>

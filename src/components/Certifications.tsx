@@ -13,9 +13,10 @@ function CertificationCard({ cert, index }: { cert: (typeof certifications)[numb
       initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0, transition: { duration: 0.45, delay: index * 0.05 } }}
       viewport={{ once: true }}
-      className="bg-surface border border-border rounded-card p-5 shadow-card hover:shadow-card-md transition-shadow duration-300"
+      whileHover={{ y: -6, scale: 1.01 }}
+      className="bg-surface border border-border rounded-[20px] p-5 shadow-[0_12px_35px_rgba(0,0,0,0.08)] transition-all duration-200 hover:shadow-[0_16px_42px_rgba(0,0,0,0.11)]"
     >
-      <div className="w-10 h-10 bg-bg border border-border rounded-xl flex items-center justify-center text-lg text-primary mb-4">
+      <div className="w-12 h-12 bg-bg border border-border rounded-xl flex items-center justify-center text-lg text-primary mb-4">
         {cert.icon}
       </div>
       <div className="inline-flex items-center rounded-full border border-accent-border bg-bg px-2.5 py-0.5 text-[0.65rem] font-semibold uppercase tracking-widest text-primary mb-3">
@@ -41,7 +42,7 @@ export default function CertificationsSection() {
   const hiddenCertifications = certifications.slice(3);
 
   return (
-    <section id="certifications" className="pt-24 pb-8 bg-bg">
+    <section id="certifications" className="py-24 bg-bg">
       <div className="max-w-5xl mx-auto px-6">
         <SectionHeader
           label="Certifications"

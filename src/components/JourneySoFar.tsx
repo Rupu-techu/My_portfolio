@@ -43,7 +43,8 @@ function TimelineItem({ item, index }: { item: (typeof journeySoFar)[number]; in
         initial={{ opacity: 0, x: isLeft ? -16 : 16 }}
         whileInView={{ opacity: 1, x: 0, transition: { duration: 0.45, delay: index * 0.06 } }}
         viewport={{ once: true, amount: 0.35 }}
-        className={`bg-surface border border-border rounded-card p-5 shadow-card hover:shadow-card-md transition-shadow duration-300 ${
+        whileHover={{ y: -6, scale: 1.01 }}
+        className={`bg-surface border border-border rounded-[20px] p-5 shadow-[0_12px_35px_rgba(0,0,0,0.08)] transition-all duration-200 hover:shadow-[0_16px_42px_rgba(0,0,0,0.11)] ${
           isLeft ? "md:col-start-1 md:justify-self-end md:pr-10" : "md:col-start-3 md:pl-10"
         }`}
       >

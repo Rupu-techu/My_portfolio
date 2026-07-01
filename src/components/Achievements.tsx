@@ -49,10 +49,11 @@ export default function Achievements() {
               initial={{ opacity: 0, y: 22 }}
               whileInView={{ opacity: 1, y: 0, transition: { duration: 0.55, delay: index * 0.08 } }}
               viewport={{ once: true }}
-              className="group relative overflow-hidden rounded-2xl border border-accent-border bg-[linear-gradient(135deg,rgba(244,234,225,0.98)_0%,rgba(232,221,213,0.92)_55%,rgba(215,191,169,0.88)_100%)] p-6 md:p-7 shadow-card-md transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover"
+              whileHover={{ y: -6, scale: 1.01 }}
+              className="group relative overflow-hidden rounded-[20px] border border-border bg-surface p-6 md:p-7 shadow-[0_12px_35px_rgba(0,0,0,0.08)] transition-all duration-200 hover:shadow-[0_16px_42px_rgba(0,0,0,0.11)]"
             >
               <PremiumBlob />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.28),transparent_32%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(200,155,109,0.08),transparent_32%)]" />
 
               <div className="relative flex items-start gap-4 md:gap-5">
                 <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl border border-border bg-surface flex items-center justify-center text-2xl md:text-3xl shrink-0 shadow-sm">
@@ -102,7 +103,8 @@ export default function Achievements() {
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0, transition: { duration: 0.45, delay: index * 0.05 } }}
               viewport={{ once: true }}
-              className="bg-bg border border-border rounded-card p-5 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-card-md"
+              whileHover={{ y: -6, scale: 1.01 }}
+              className="bg-surface border border-border rounded-[20px] p-5 shadow-[0_12px_35px_rgba(0,0,0,0.08)] transition-all duration-200 hover:shadow-[0_16px_42px_rgba(0,0,0,0.11)]"
             >
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl border border-border bg-surface flex items-center justify-center text-lg shrink-0 shadow-sm">
