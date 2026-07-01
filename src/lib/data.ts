@@ -33,6 +33,27 @@ export type ExperienceItem = {
   body: string;
 };
 
+export type LeadershipItem = {
+  type: "Leadership" | "Volunteering" | "Community";
+  date: string;
+  title: string;
+  org: string;
+  body: string;
+};
+
+export type JourneyItem = {
+  category:
+    | "Hackathons"
+    | "Competitions"
+    | "Open Source Contributions"
+    | "Community"
+    | "Technical Events";
+  date: string;
+  title: string;
+  org: string;
+  body: string;
+};
+
 export type AchievementItem = {
   icon: string;
   title: string;
@@ -40,13 +61,42 @@ export type AchievementItem = {
   meta: string;
 };
 
-export type FeaturedAchievement = {
+export type FeaturedAchievementCard = {
+  icon: string;
+  title: string;
+  description: string;
+  organization: string;
+  year: string;
+  platform?: string;
+  tags: string[];
+  statLabel?: string;
+  statValue?: string;
+  buttonText?: string;
+  href?: string | null;
+};
+
+export type MinorAchievementCard = {
+  icon: string;
+  title: string;
+  description: string;
+  tags: string[];
+};
+
+export type SpotlightAchievement = {
   icon: string;
   title: string;
   role: string;
   description: string;
   profileUrl: string;
   buttonText: string;
+};
+
+export type CertificationItem = {
+  icon: string;
+  title: string;
+  issuer: string;
+  credentialType: string;
+  url?: string | null;
 };
 
 export type ContactLink = {
@@ -79,7 +129,6 @@ export const personal = {
   githubUsername: "@Rupu-techu",
   location: "Kolkata, West Bengal, India",
   resumeUrl: "https://drive.google.com/file/d/12WSq0R_MelAff6iGbC6qoTtLzY6jGYgf/view?usp=sharing",
-  githubSubtitle: "GitHub Profile Highlights",
 };
 
 export const heroStats: StatItem[] = [
@@ -373,128 +422,193 @@ export const experiences: ExperienceItem[] = [
     body:
       "Participated in a 4-week internship focused on cybersecurity, networking, and ethical hacking concepts. Gained hands-on experience with Kali Linux, Wireshark, Nmap, and Social Engineering Toolkit while exploring phishing attacks, MITM attacks, cryptography, and packet analysis using Gen-AI.",
   },
+];
+
+export const leadership: LeadershipItem[] = [
   {
     type: "Leadership",
     date: "2026",
     title: "Student Volunteer",
     org: "ConnectTech 2026",
-    body:
-      "Assisted in event coordination, technical sessions, and participant engagement.",
+    body: "Assisted in event coordination, technical sessions, and participant engagement.",
   },
   {
     type: "Leadership",
     date: "2025",
     title: "Student Volunteer",
     org: "Rotary Business Summit 2025",
-    body:
-      "Supported logistics, coordination, and event operations.",
+    body: "Supported logistics, coordination, and event operations.",
   },
   {
     type: "Leadership",
     date: "Ongoing",
-    title: "Active Contributor",
+    title: "Event Organizer",
     org: "Technical College Events",
-    body:
-      "Participated in organizing workshops, technical sessions, competitions, and student engagement activities.",
+    body: "Helped organize workshops, technical sessions, competitions, and student engagement activities.",
   },
   {
-    type: "Competition",
-    date: "2026",
-    title: "GDG India Solution Challenge 2026",
-    org: "Hackathon Project",
-    body:
-      "Co-developed AidFlow, an AI-driven crisis intelligence system using FastAPI, Gemini API, and Google Cloud Run.",
-  },
-  {
-    type: "Competition",
-    date: "2026",
-    title: "IBM Bob Dev Day Hackathon",
-    org: "Hackathon Project",
-    body:
-      "Developed DevSprint AI, an AI-powered project generator for automated planning and starter code generation.",
-  },
-  {
-    type: "Competition",
-    date: "2026",
-    title: "Hack2Skill PromptWars",
-    org: "Hackathon Project",
-    body:
-      "Developed ELECTO, an AI-powered election assistant with cloud deployment and official resource integration.",
-  },
-  {
-    type: "Competition",
-    date: "2026",
-    title: "Script Grid Coding Contest",
-    org: "GeeksforGeeks Student Chapter",
-    body:
-      "Participant in the Script Grid coding contest.",
+    type: "Volunteering",
+    date: "2025 - 2026",
+    title: "Community Volunteer",
+    org: "Tech Communities",
+    body: "Contributed time to student-led initiatives, technical events, and collaborative community activities.",
   },
 ];
 
-export const achievements: AchievementItem[] = [
+export const journeySoFar: JourneyItem[] = [
+  {
+    category: "Hackathons",
+    date: "2026",
+    title: "GDG India Solution Challenge 2026",
+    org: "Hackathon Project",
+    body: "Co-developed AidFlow, an AI-driven crisis intelligence system using FastAPI, Gemini API, and Google Cloud Run.",
+  },
+  {
+    category: "Hackathons",
+    date: "2026",
+    title: "IBM Bob Dev Day Hackathon",
+    org: "Hackathon Project",
+    body: "Built DevSprint AI, an AI-powered project generator for automated planning and starter code generation.",
+  },
+  {
+    category: "Competitions",
+    date: "2026",
+    title: "Hack2Skill PromptWars",
+    org: "AI Election Assistant",
+    body: "Developed ELECTO, an AI-powered election assistant with cloud deployment and official resource integration.",
+  },
+  {
+    category: "Open Source Contributions",
+    date: "2026",
+    title: "GirlScript Summer of Code",
+    org: "GSSoC 2026",
+    body: "Contributed to open-source AI and intelligent systems projects while collaborating with the broader developer community.",
+  },
+  {
+    category: "Technical Events",
+    date: "2026",
+    title: "Script Grid Coding Contest",
+    org: "GeeksforGeeks Student Chapter",
+    body: "Participated in a coding contest that reinforced problem-solving, speed, and algorithmic thinking.",
+  },
+  {
+    category: "Community",
+    date: "2025 - 2026",
+    title: "Technical Community Events",
+    org: "College and developer communities",
+    body: "Joined community-led sessions and technical meetups that strengthened my exposure to modern tools and teamwork.",
+  },
+];
+
+export const featuredAchievements: FeaturedAchievementCard[] = [
+  {
+    icon: "GS",
+    title: "GSSoC Contributions",
+    description:
+      "Contributed to GirlScript Summer of Code through open-source collaboration, community participation, and consistent repository contributions.",
+    organization: "GirlScript Summer of Code",
+    year: "2026",
+    tags: ["Open Source", "Community", "Git"],
+    buttonText: "View GSSoC Profile",
+    href: "https://gssoc.girlscript.org/profile/d66db5bc-527d-4a05-a787-f7a352ae7033",
+  },
   {
     icon: "DSA",
-    title: "150+ DSA Problems Solved",
-    description: "Solved across LeetCode, HackerRank, and GeeksforGeeks.",
-    meta: "Problem Solving",
+    title: "DSA Progress",
+    description:
+      "Built steady problem-solving momentum across LeetCode, HackerRank, and GeeksforGeeks through regular practice and revision.",
+    organization: "LeetCode / GFG",
+    year: "Ongoing",
+    platform: "LeetCode / GFG",
+    tags: ["DSA", "Problem Solving"],
+    statLabel: "Problems Solved",
+    statValue: "150+",
+    buttonText: "View LeetCode Profile",
+    href: "https://leetcode.com/u/rupu-techu/",
+  },
+];
+
+export const minorAchievements: MinorAchievementCard[] = [
+  {
+    icon: "AW",
+    title: "Awards",
+    description: "Earned recognition including a 2nd Runner-Up finish in a poster competition.",
+    tags: ["Awards", "Recognition"],
   },
   {
-    icon: "H10",
-    title: "10+ Hackathons Participated",
-    description: "Focused on Artificial Intelligence, Software Development, and Problem Solving.",
-    meta: "Hackathons",
+    icon: "CR",
+    title: "Competition Results",
+    description: "Delivered strong outcomes across hackathons, contests, and challenge-based events.",
+    tags: ["Competitions", "Hackathons"],
   },
   {
-    icon: "2R",
-    title: "2nd Runner-Up",
-    description: "Mechanics Poster Competition on Recent Advances in Automobile Industry.",
-    meta: "Competition",
+    icon: "OS",
+    title: "Open Source Contributions",
+    description: "Contributed to collaborative repositories and community-driven development efforts.",
+    tags: ["Open Source", "Community"],
   },
-  {
-    icon: "SS",
-    title: "Silver Certification",
-    description: "Developing Soft Skills and Personality (NPTEL).",
-    meta: "NPTEL",
-  },
-  {
-    icon: "PY",
-    title: "Silver Certification",
-    description: "Joy of Computing Using Python (NPTEL).",
-    meta: "NPTEL",
-  },
+];
+
+export const certifications: CertificationItem[] = [
   {
     icon: "IT",
     title: "Information Theory",
-    description: "The Chinese University of Hong Kong (Coursera).",
-    meta: "Coursera",
+    issuer: "The Chinese University of Hong Kong",
+    credentialType: "Coursera",
+    url: "https://www.coursera.org/",
   },
   {
     icon: "GA",
     title: "Generative AI for Everyone",
-    description: "DeepLearning.AI (Coursera).",
-    meta: "Coursera",
+    issuer: "DeepLearning.AI",
+    credentialType: "Coursera",
+    url: "https://www.coursera.org/",
   },
   {
     icon: "AS",
     title: "Advanced System Security Topics",
-    description: "University of London (Coursera).",
-    meta: "Coursera",
+    issuer: "University of London",
+    credentialType: "Coursera",
+    url: "https://www.coursera.org/",
+  },
+  {
+    icon: "SS",
+    title: "Developing Soft Skills and Personality",
+    issuer: "NPTEL",
+    credentialType: "NPTEL",
+    url: "https://nptel.ac.in/",
+  },
+  {
+    icon: "PY",
+    title: "Joy of Computing Using Python",
+    issuer: "NPTEL",
+    credentialType: "NPTEL",
+    url: "https://nptel.ac.in/",
   },
   {
     icon: "RAG",
     title: "Retrieval-Augmented Generation (RAG)",
-    description: "LinkedIn Learning.",
-    meta: "LinkedIn Learning",
+    issuer: "LinkedIn Learning",
+    credentialType: "LinkedIn Learning",
+    url: "https://www.linkedin.com/learning/",
   },
   {
     icon: "AI",
     title: "Introduction to Artificial Intelligence",
-    description: "Google (Coursera).",
-    meta: "Coursera",
+    issuer: "Google",
+    credentialType: "Coursera",
+    url: "https://www.coursera.org/",
+  },
+  {
+    icon: "CS",
+    title: "Cloud Security Foundations",
+    issuer: "Self-paced learning",
+    credentialType: "Featured learning",
+    url: null,
   },
 ];
 
-export const featuredAchievement: FeaturedAchievement = {
+export const featuredAchievement: SpotlightAchievement = {
   icon: "GC",
   title: "GirlScript Summer of Code (GSSoC) 2026",
   role: "Contributor - AI / Agents Track",
@@ -504,7 +618,7 @@ export const featuredAchievement: FeaturedAchievement = {
   buttonText: "View GSSoC Profile",
 };
 
-export const codingAchievement: FeaturedAchievement = {
+export const codingAchievement: SpotlightAchievement = {
   icon: "LC",
   title: "Data Structures & Algorithms",
   role: "LeetCode",
@@ -513,14 +627,6 @@ export const codingAchievement: FeaturedAchievement = {
   profileUrl: "https://leetcode.com/u/rupu-techu/",
   buttonText: "View LeetCode Profile",
 };
-
-export const githubStats: StatItem[] = [
-  { value: "316", label: "Contributions in 2026" },
-  { value: "18", label: "Public Repositories" },
-  { value: "276+", label: "Commits in 2026" },
-  { value: "24", label: "Pull Requests" },
-  { value: "22", label: "Repositories Contributed To" },
-];
 
 export const contactLinks: ContactLink[] = [
   { icon: "EM", label: "Email", value: personal.email, href: `mailto:${personal.email}` },
@@ -535,6 +641,10 @@ export const navLinks = [
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
+  { label: "Leadership", href: "#leadership" },
+  { label: "Journey", href: "#journey" },
   { label: "Achievements", href: "#achievements" },
+  { label: "Certifications", href: "#certifications" },
+  { label: "GitHub", href: "#github" },
   { label: "Contact", href: "#contact" },
 ];
