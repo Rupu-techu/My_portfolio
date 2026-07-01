@@ -1,4 +1,6 @@
 "use client";
+
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FiExternalLink, FiGithub, FiPlay } from "react-icons/fi";
@@ -37,64 +39,49 @@ function ProjectButtons({ project, compact = false }: { project: Project; compac
   );
 }
 
-function ProjectCard({ project, featured = false }: { project: Project; featured?: boolean }) {
-  if (featured) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 28 }}
-        whileInView={{ opacity: 1, y: 0, transition: { duration: 0.55 } }}
-        viewport={{ once: true }}
-        className="mb-6 bg-bg border border-border rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-shadow duration-300 md:grid md:grid-cols-[2fr_3fr]"
-      >
-        <div
-          className="h-[200px] md:h-auto flex items-center justify-center relative"
-          style={{ background: `linear-gradient(145deg,${project.gradientFrom},${project.gradientTo})` }}
-        >
-          <span className="text-[5rem] opacity-35">{project.emoji}</span>
-          <span className="absolute top-3 left-3 bg-primary text-white text-[0.68rem] font-semibold rounded-full px-3 py-1">
-            Featured
-          </span>
-        </div>
-        <div className="p-7 flex flex-col justify-between">
-          <div>
-            <div className="flex flex-wrap gap-1.5 mb-4">
-              {project.technologies.map(t => <span key={t} className="chip-muted">{t}</span>)}
-            </div>
-            <p className="text-[0.68rem] font-semibold uppercase tracking-widest text-secondary mb-1">{project.subtitle}</p>
-            <h3 className="font-serif text-2xl text-ink mb-3">{project.title}</h3>
-            <p className="text-sm text-muted leading-[1.7] mb-4">{project.description}</p>
-            <ul className="space-y-2 mb-6">
-              {project.achievements.map((a, ai) => (
-                <li key={ai} className="flex gap-2.5 text-sm text-muted">
-                  <span className="text-secondary font-bold mt-0.5 shrink-0">{"->"}</span>
-                  {a}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <ProjectButtons project={project} />
-        </div>
-      </motion.div>
-    );
-  }
-
+function ProjectCard({ project }: { project: Project }) {
   return (
-    <motion.div
+    <motion.article
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
       viewport={{ once: true }}
-      whileHover={{ y: -3 }}
-      className="bg-bg border border-border rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col"
+      whileHover={{ y: -4 }}
+      className="group bg-bg border border-border rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 flex h-full flex-col"
     >
-      <div
-        className="h-[160px] flex items-center justify-center"
-        style={{ background: `linear-gradient(145deg,${project.gradientFrom},${project.gradientTo})` }}
-      >
-        <span className="text-[3.5rem] opacity-35">{project.emoji}</span>
+      <div className="relative aspect-[16/9] overflow-hidden bg-[#efe4db] border-b border-border">
+        {project.image ? (
+          <>
+            <Image
+              src={project.image}
+              alt={`${project.title} dashboard screenshot`}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-contain p-3 transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#2a1f16]/8 via-transparent to-transparent" />
+          </>
+        ) : (
+          <div
+            className="absolute inset-0 flex items-center justify-center"
+            style={{ background: `linear-gradient(145deg,${project.gradientFrom},${project.gradientTo})` }}
+          >
+            <span className="text-[5rem] opacity-35">{project.emoji}</span>
+          </div>
+        )}
+        {project.featured && (
+          <span className="absolute top-3 left-3 bg-primary text-white text-[0.68rem] font-semibold rounded-full px-3 py-1 shadow-sm">
+            Featured
+          </span>
+        )}
       </div>
-      <div className="p-6 flex flex-col flex-1">
+
+      <div className="p-6 flex flex-1 flex-col">
         <div className="flex flex-wrap gap-1.5 mb-3">
-          {project.technologies.map(t => <span key={t} className="chip-muted">{t}</span>)}
+          {project.technologies.map(t => (
+            <span key={t} className="chip-muted">
+              {t}
+            </span>
+          ))}
         </div>
         <p className="text-[0.68rem] font-semibold uppercase tracking-widest text-secondary mb-1">{project.subtitle}</p>
         <h3 className="font-serif text-xl text-ink mb-2">{project.title}</h3>
@@ -109,21 +96,23 @@ function ProjectCard({ project, featured = false }: { project: Project; featured
         </ul>
         <ProjectButtons project={project} compact />
       </div>
-    </motion.div>
+    </motion.article>
   );
 }
 
 export default function ProjectShowcase({ label, title, subtitle, projects, layout, ctaHref, ctaLabel }: Props) {
-  const featured = layout === "homepage" ? projects.slice(0, 1) : [];
-  const gridItems = layout === "homepage" ? projects.slice(1) : projects;
+  const gridClass = layout === "homepage"
+    ? "grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch"
+    : "grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch";
 
   return (
     <section className="py-24 bg-surface">
       <div className="max-w-5xl mx-auto px-6">
         <SectionHeader label={label} title={title} subtitle={subtitle} />
-        {featured.map(project => <ProjectCard key={project.id} project={project} featured />)}
-        <div className={layout === "homepage" ? "grid grid-cols-1 md:grid-cols-2 gap-5" : "grid grid-cols-1 md:grid-cols-2 gap-5"}>
-          {gridItems.map(project => <ProjectCard key={project.id} project={project} />)}
+        <div className={gridClass}>
+          {projects.map(project => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
         </div>
         {ctaHref && ctaLabel && (
           <div className="mt-8 flex justify-center">

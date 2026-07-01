@@ -15,6 +15,7 @@ export type Project = {
   emoji: string;
   gradientFrom: string;
   gradientTo: string;
+  image?: string | null;
   title: string;
   subtitle: string;
   description: string;
@@ -234,6 +235,7 @@ export const featuredProjects: Project[] = [
     emoji: "ON",
     gradientFrom: "#e8ddd5",
     gradientTo: "#c9b09a",
+    image: "/images/oncoai-dashboard.png",
     title: "ONCO AI - Explainable Breast Image Screening System",
     subtitle: "Healthcare AI",
     description:
@@ -253,6 +255,7 @@ export const featuredProjects: Project[] = [
     emoji: "CA",
     gradientFrom: "#dde8e0",
     gradientTo: "#a8c4b0",
+    image: "/images/cloud-anomaly-dashboard.png",
     title: "Context-Aware Cloud Anomaly Detection System",
     subtitle: "Cloud Security Analytics",
     description:
@@ -272,6 +275,7 @@ export const featuredProjects: Project[] = [
     emoji: "AN",
     gradientFrom: "#ddd8e8",
     gradientTo: "#b0a8c4",
+    image: "/images/aegisnexus-dashboard.png",
     title: "AegisNexus AI - Enterprise AI Governance Prompt Security Platform",
     subtitle: "AI Governance",
     description:
@@ -291,6 +295,7 @@ export const featuredProjects: Project[] = [
     emoji: "EH",
     gradientFrom: "#e3e9df",
     gradientTo: "#bfd0b8",
+    image: "/images/environmental-dashboard.png",
     title: "Environmental AI Healthcare System using CNN and RAG",
     subtitle: "AI for Healthcare",
     description:
@@ -307,25 +312,6 @@ export const featuredProjects: Project[] = [
     demo: null,
     video: null,
   },
-  {
-    id: "aidflow",
-    featured: true,
-    emoji: "AF",
-    gradientFrom: "#e8ddd5",
-    gradientTo: "#d8c0ac",
-    title: "AidFlow - AI-Driven Crisis Intelligence System",
-    subtitle: "Crisis Intelligence",
-    description:
-      "AI-powered crisis intelligence platform developed for GDG India Solution Challenge 2026. Built using FastAPI, Google Gemini API, and cloud deployment technologies to support intelligent crisis monitoring and decision support.",
-    technologies: ["FastAPI", "Gemini API", "Google Cloud Run"],
-    achievements: [
-      "Co-developed for GDG India Solution Challenge 2026",
-      "Supports intelligent crisis monitoring and decision support",
-    ],
-    github: "https://github.com/Rupu-techu/AidFLow",
-    demo: "https://aidflow-ai.vercel.app/",
-    video: null,
-  },
 ];
 
 export const additionalProjects: Project[] = [
@@ -335,6 +321,7 @@ export const additionalProjects: Project[] = [
     emoji: "EL",
     gradientFrom: "#dde8e0",
     gradientTo: "#b2cbb8",
+    image: "/images/electo-dashboard.png",
     title: "ELECTO",
     subtitle: "AI Election Assistant",
     description:
@@ -365,6 +352,26 @@ export const additionalProjects: Project[] = [
     ],
     github: "https://github.com/Rupu-techu/Devsprint-AI_powered-project-generator",
     demo: null,
+    video: null,
+  },
+  {
+    id: "aidflow",
+    featured: false,
+    emoji: "AF",
+    gradientFrom: "#e8ddd5",
+    gradientTo: "#d8c0ac",
+    image: "/images/aidflow-dashboard.png",
+    title: "AidFlow - AI-Driven Crisis Intelligence System",
+    subtitle: "Crisis Intelligence",
+    description:
+      "AI-powered crisis intelligence platform developed for GDG India Solution Challenge 2026. Built using FastAPI, Google Gemini API, and cloud deployment technologies to support intelligent crisis monitoring and decision support.",
+    technologies: ["FastAPI", "Gemini API", "Google Cloud Run"],
+    achievements: [
+      "Co-developed for GDG India Solution Challenge 2026",
+      "Supports intelligent crisis monitoring and decision support",
+    ],
+    github: "https://github.com/Rupu-techu/AidFLow",
+    demo: "https://aidflow-ai.vercel.app/",
     video: null,
   },
   {
