@@ -30,10 +30,41 @@ type PublicEvent = {
   payload: Record<string, unknown>;
 };
 
+type SearchItem = {
+  repository_url?: string;
+  repository?: {
+    html_url?: string;
+    full_name?: string;
+  };
+};
+
+type SearchResponse<TItem> = {
+  total_count: number;
+  items: TItem[];
+};
+
 type ContributionDay = {
   date: string;
   contributionCount: number;
 };
+
+function getYearRange() {
+  const year = new Date().getUTCFullYear();
+  return {
+    start: `${year}-01-01`,
+    end: `${year}-12-31`,
+  };
+}
+
+function getRollingYearRange() {
+  const end = new Date();
+  const start = new Date(end);
+  start.setUTCDate(start.getUTCDate() - 365);
+  return {
+    from: start.toISOString(),
+    to: end.toISOString(),
+  };
+}
 
 function computeStreak(days: ContributionDay[]): number {
   const byDate = new Map(days.map(day => [day.date, day.contributionCount]));
@@ -143,6 +174,76 @@ async function fetchRestJson<T>(url: string): Promise<T> {
   return response.json() as Promise<T>;
 }
 
+async function fetchSearchJson<T>(url: string, preview = false): Promise<T> {
+  const response = await fetch(url, {
+    headers: {
+      Accept: preview
+        ? "application/vnd.github.cloak-preview+json"
+        : "application/vnd.github+json",
+      ...(token
+        ? {
+            Authorization: `Bearer ${token}`,
+            "X-GitHub-Api-Version": "2022-11-28",
+          }
+        : {
+            "X-GitHub-Api-Version": "2022-11-28",
+          }),
+    },
+    cache: "no-store",
+  });
+  if (!response.ok) {
+    throw new Error(`GitHub search request failed: ${response.status}`);
+  }
+  return response.json() as Promise<T>;
+}
+
+function uniqueRepoCount(items: SearchItem[]) {
+  const repos = new Set<string>();
+  items.forEach(item => {
+    if (item.repository_url) {
+      repos.add(item.repository_url);
+    }
+    const repoUrl = item.repository?.html_url;
+    if (repoUrl) {
+      repos.add(repoUrl);
+    }
+    const fullName = item.repository?.full_name;
+    if (fullName) {
+      repos.add(`https://github.com/${fullName}`);
+    }
+  });
+  return repos.size;
+}
+
+async function loadSearchFallback(username: string) {
+  const { start, end } = getYearRange();
+  const [issues, prs, commitSearch] = await Promise.all([
+    fetchSearchJson<SearchResponse<SearchItem>>(
+      `https://api.github.com/search/issues?q=author:${encodeURIComponent(username)}+type:issue+created:${start}..${end}&per_page=100`
+    ),
+    fetchSearchJson<SearchResponse<SearchItem>>(
+      `https://api.github.com/search/issues?q=author:${encodeURIComponent(username)}+type:pr+created:${start}..${end}&per_page=100`
+    ),
+    fetchSearchJson<SearchResponse<SearchItem>>(
+      `https://api.github.com/search/commits?q=author:${encodeURIComponent(username)}+committer-date:${start}..${end}&per_page=100`,
+      true
+    ),
+  ]);
+
+  const repositoriesContributedTo = uniqueRepoCount([
+    ...issues.items,
+    ...prs.items,
+    ...commitSearch.items,
+  ]);
+
+  return {
+    totalContributionsThisYear: issues.total_count + prs.total_count + commitSearch.total_count,
+    pullRequests: prs.total_count,
+    commits: commitSearch.total_count,
+    repositoriesContributedTo,
+  };
+}
+
 export async function GET() {
   try {
     const [profile, repos, events] = await Promise.all([
@@ -182,9 +283,11 @@ export async function GET() {
     let contributionStreak: number | null = null;
     let totalContributionsThisYear: number | null = null;
     let pullRequests: number | null = null;
+    let commits: number | null = null;
     let repositoriesContributedTo: number | null = null;
 
     if (token) {
+      const { from, to } = getRollingYearRange();
       const gqlResponse = await fetch("https://api.github.com/graphql", {
         method: "POST",
         headers: {
@@ -194,7 +297,7 @@ export async function GET() {
         cache: "no-store",
         body: JSON.stringify({
           query: `
-            query($login: String!) {
+            query($login: String!, $from: DateTime!, $to: DateTime!) {
               user(login: $login) {
                 pinnedItems(first: 6, types: REPOSITORY) {
                   nodes {
@@ -208,7 +311,7 @@ export async function GET() {
                     }
                   }
                 }
-                contributionsCollection {
+                contributionsCollection(from: $from, to: $to) {
                   contributionCalendar {
                     totalContributions
                     weeks {
@@ -219,12 +322,13 @@ export async function GET() {
                     }
                   }
                   totalPullRequestContributions
+                  totalCommitContributions
                   totalRepositoriesWithContributedCommits
                 }
               }
             }
           `,
-          variables: { login: username },
+          variables: { login: username, from, to },
         }),
       });
 
@@ -248,6 +352,7 @@ export async function GET() {
                   weeks: Array<{ contributionDays: ContributionDay[] }>;
                 };
                 totalPullRequestContributions?: number;
+                totalCommitContributions?: number;
                 totalRepositoriesWithContributedCommits?: number;
               };
             };
@@ -274,8 +379,22 @@ export async function GET() {
         }
 
         pullRequests = gqlData.data?.user?.contributionsCollection?.totalPullRequestContributions ?? null;
+        commits = gqlData.data?.user?.contributionsCollection?.totalCommitContributions ?? null;
         repositoriesContributedTo = gqlData.data?.user?.contributionsCollection?.totalRepositoriesWithContributedCommits ?? null;
       }
+    }
+
+    if (
+      totalContributionsThisYear === null ||
+      pullRequests === null ||
+      commits === null ||
+      repositoriesContributedTo === null
+    ) {
+      const fallback = await loadSearchFallback(username);
+      totalContributionsThisYear = totalContributionsThisYear ?? fallback.totalContributionsThisYear;
+      pullRequests = pullRequests ?? fallback.pullRequests;
+      commits = commits ?? fallback.commits;
+      repositoriesContributedTo = repositoriesContributedTo ?? fallback.repositoriesContributedTo;
     }
 
     return NextResponse.json({
@@ -291,6 +410,7 @@ export async function GET() {
       contributionStreak,
       totalContributionsThisYear,
       pullRequests,
+      commits,
       repositoriesContributedTo,
       languages,
       pinnedRepos,

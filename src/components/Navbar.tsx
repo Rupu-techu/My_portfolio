@@ -46,7 +46,6 @@ export default function Navbar() {
             );
           })}
         </nav>
-        <a href="#contact" className="hidden md:inline-flex btn-primary py-2 px-5 text-xs">Hire Me</a>
         <button className="md:hidden flex flex-col justify-center gap-[5px] p-1.5" onClick={() => setOpen(v => !v)} aria-label="Toggle menu">
           <span className={`block w-[21px] h-[1.5px] bg-ink rounded transition-transform duration-300 origin-center ${open ? "rotate-45 translate-y-[6.5px]" : ""}`} />
           <span className={`block w-[21px] h-[1.5px] bg-ink rounded transition-opacity duration-300 ${open ? "opacity-0" : ""}`} />
@@ -59,9 +58,6 @@ export default function Navbar() {
             {navLinks.map(l => (
               <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="flex items-center px-6 py-3.5 text-sm text-muted border-b border-border last:border-0 hover:text-primary hover:bg-accent/40 transition-colors">{l.label}</a>
             ))}
-            <div className="px-6 py-4">
-              <a href="#contact" onClick={() => setOpen(false)} className="btn-primary w-full justify-center">Hire Me</a>
-            </div>
           </motion.nav>
         )}
       </AnimatePresence>

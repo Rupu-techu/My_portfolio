@@ -16,12 +16,21 @@ type GitHubProfileData = {
   publicRepositories: number;
   totalContributionsThisYear: number | null;
   pullRequests: number | null;
+  commits: number | null;
   repositoriesContributedTo: number | null;
 };
 
 function valueOrDash(value: number | null | undefined) {
   return value === null || value === undefined ? "-" : String(value);
 }
+
+const statItems = [
+  { label: "Public Repositories", key: "publicRepositories" as const },
+  { label: "Contributions (Last 12 Months)", key: "totalContributionsThisYear" as const },
+  { label: "Pull Requests", key: "pullRequests" as const },
+  { label: "Commits", key: "commits" as const },
+  { label: "Repositories Contributed To", key: "repositoriesContributedTo" as const },
+] as const;
 
 export default function GitHubSection() {
   const [data, setData] = useState<GitHubProfileData | null>(null);
@@ -61,13 +70,13 @@ export default function GitHubSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
           viewport={{ once: true }}
-          className="bg-surface border border-border rounded-2xl p-7 flex flex-wrap gap-6 items-center mb-7 shadow-card"
+          className="bg-surface border border-border rounded-2xl p-7 flex flex-wrap lg:flex-nowrap gap-6 items-start shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-card-md"
         >
-          <div className="relative w-[72px] h-[72px] rounded-full overflow-hidden bg-gradient-to-br from-[#e8ddd5] to-[#d4c4b5] border-2 border-border flex items-center justify-center shrink-0">
+          <div className="relative w-[88px] h-[88px] rounded-full overflow-hidden bg-gradient-to-br from-[#e8ddd5] to-[#d4c4b5] border-2 border-border flex items-center justify-center shrink-0">
             {loading ? (
               <span className="text-xl font-semibold text-primary">GH</span>
             ) : data?.avatarUrl ? (
-              <Image src={data.avatarUrl} alt={data.name ?? personal.githubUsername} fill sizes="72px" className="object-cover" />
+              <Image src={data.avatarUrl} alt={data.name ?? personal.githubUsername} fill sizes="88px" className="object-cover" />
             ) : (
               <span className="text-xl font-semibold text-primary">GH</span>
             )}
@@ -76,31 +85,42 @@ export default function GitHubSection() {
           <div className="flex-1 min-w-[200px]">
             <h3 className="font-serif text-xl text-ink mb-1">{data?.username ?? personal.githubUsername}</h3>
             {data?.name && <p className="text-sm text-secondary mb-1">{data.name}</p>}
-            {data?.bio && <p className="text-sm text-muted mb-3 leading-[1.6]">{data.bio}</p>}
+            {data?.bio && (
+              <p
+                className="text-sm text-muted mb-3 leading-[1.6]"
+                style={{
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  WebkitLineClamp: 2,
+                  overflow: "hidden",
+                }}
+              >
+                {data.bio}
+              </p>
+            )}
             {!data?.bio && (
               <p className="text-sm text-muted mb-3">Live GitHub profile data, updated automatically from GitHub.</p>
             )}
-            <div className="flex flex-wrap gap-5">
-              <div className="text-center">
-                <strong className="block font-serif text-xl text-primary">{valueOrDash(data?.publicRepositories)}</strong>
-                <span className="text-xs text-muted">Public Repositories</span>
-              </div>
-              <div className="text-center">
-                <strong className="block font-serif text-xl text-primary">{valueOrDash(data?.totalContributionsThisYear)}</strong>
-                <span className="text-xs text-muted">Contributions this year</span>
-              </div>
-              <div className="text-center">
-                <strong className="block font-serif text-xl text-primary">{valueOrDash(data?.pullRequests)}</strong>
-                <span className="text-xs text-muted">Pull Requests</span>
-              </div>
-              <div className="text-center">
-                <strong className="block font-serif text-xl text-primary">{valueOrDash(data?.repositoriesContributedTo)}</strong>
-                <span className="text-xs text-muted">Repositories Contributed To</span>
+            <div className="mt-4 rounded-2xl border border-border bg-bg overflow-hidden">
+              <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap">
+                {statItems.map((stat, index) => (
+                  <div
+                    key={stat.label}
+                    className={`flex-1 basis-full md:basis-1/3 lg:basis-0 px-4 py-4 text-center ${
+                      index !== statItems.length - 1 ? "lg:border-r lg:border-border" : ""
+                    } ${index !== statItems.length - 1 ? "border-b border-border md:border-b-0" : ""}`}
+                  >
+                    <strong className="block font-serif text-xl text-primary">{valueOrDash(data?.[stat.key])}</strong>
+                    <span className="block text-[0.65rem] uppercase tracking-[0.14em] text-muted mt-1 leading-[1.35]">
+                      {stat.label}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
-          <a href={personal.github} target="_blank" rel="noopener noreferrer" className="btn-outline shrink-0">
+          <a href={personal.github} target="_blank" rel="noopener noreferrer" className="btn-outline shrink-0 self-start lg:mt-1">
             <FiGithub size={15} /> View Profile
           </a>
         </motion.div>
