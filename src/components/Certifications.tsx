@@ -61,6 +61,7 @@ export default function CertificationsSection() {
             className="btn-outline"
             aria-expanded={showMore}
             aria-controls="more-certifications"
+            suppressHydrationWarning
           >
             {showMore ? <FiChevronUp size={14} /> : <FiChevronDown size={14} />}
             {showMore ? "Show Less Certifications" : "Show More Certifications"}

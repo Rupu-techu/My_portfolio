@@ -8,6 +8,7 @@ import type { Project } from "@/lib/data";
 import SectionHeader from "./SectionHeader";
 
 type Props = {
+  id?: string;
   label: string;
   title: React.ReactNode;
   subtitle?: string;
@@ -15,6 +16,7 @@ type Props = {
   layout: "homepage" | "grid";
   ctaHref?: string;
   ctaLabel?: string;
+  sectionClassName?: string;
 };
 
 function ProjectButtons({ project, compact = false }: { project: Project; compact?: boolean }) {
@@ -100,13 +102,13 @@ function ProjectCard({ project }: { project: Project }) {
   );
 }
 
-export default function ProjectShowcase({ label, title, subtitle, projects, layout, ctaHref, ctaLabel }: Props) {
+export default function ProjectShowcase({ id, label, title, subtitle, projects, layout, ctaHref, ctaLabel, sectionClassName }: Props) {
   const gridClass = layout === "homepage"
     ? "grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch"
     : "grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch";
 
   return (
-    <section className="py-24 bg-surface">
+    <section id={id} className={sectionClassName ?? "py-24 bg-surface"}>
       <div className="max-w-5xl mx-auto px-6">
         <SectionHeader label={label} title={title} subtitle={subtitle} />
         <div className={gridClass}>

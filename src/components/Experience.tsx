@@ -9,7 +9,7 @@ const typeColors: Record<string, string> = {
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 bg-bg">
+    <section id="experience" className="pt-12 pb-24 bg-bg">
       <div className="max-w-5xl mx-auto px-6">
         <SectionHeader label="Experience" title="Internships" subtitle="Hands-on industry learning and applied technical work." />
         <div className="relative pl-8">

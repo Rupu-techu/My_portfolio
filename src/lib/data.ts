@@ -279,10 +279,11 @@ export const featuredProjects: Project[] = [
     title: "AegisNexus AI - Enterprise AI Governance Prompt Security Platform",
     subtitle: "AI Governance",
     description:
-      "Enterprise AI governance and prompt security platform.",
+      "Enterprise AI governance platform focused on prompt security, AI policy compliance, and responsible LLM deployment. Built using IBM Granite, Langflow, and Flask to demonstrate secure enterprise AI workflows and governance practices.",
     technologies: ["AI Governance", "Prompt Security"],
     achievements: [
-      "Enterprise AI governance and prompt security platform",
+      "Prompt security and governance framework",
+      "IBM Granite + Langflow powered architecture",
       "Live demo available for review and presentation",
     ],
     github: "https://github.com/Rupu-techu/Aegisnexus-AI",
